@@ -6,10 +6,11 @@ class MeetingInvitation {
       // Get meeting invitation details
       const [results] = await pool.execute(
         'CALL GetMeetingInvitationDetails(?, ?, ?)',
-        [applicationNo || null, meetingId || null, userId]
+        [applicationNo || " ", meetingId || 0, userId]
       );
 
       const meetingInvitations = results[0] || [];
+     
 
       // Process each meeting invitation
       for (const invitation of meetingInvitations) {
