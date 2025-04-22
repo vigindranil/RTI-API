@@ -16,6 +16,7 @@ const searchApplicationController = require('../controllers/searchApplicationCon
 const meetingInvitationController = require('../controllers/meetingInvitationController');
 const applicationController = require('../controllers/applicationController');
 const applicationInfoController = require('../controllers/applicationInfoController');
+const createmeetingInvitationController = require('../controllers/createmeetingInvitationController');
 
 // SPIO routes
 router.post('/spio', spioController.insertSpio);
@@ -72,5 +73,6 @@ router.get('/meeting-invitation', meetingInvitationController.getMeetingInvitati
 // Application routes
 router.get('/applications/by-status', applicationController.getApplicationsByStatus);
 router.post('/admin/createNewApplication', applicationInfoController.createNewApplication);
+router.post('/admin/createMeetingInvitation', createmeetingInvitationController.createMeetingInvitation);
 
 module.exports = router;
