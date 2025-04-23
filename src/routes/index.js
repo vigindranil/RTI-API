@@ -76,5 +76,5 @@ router.get('/meeting-invitation', meetingInvitationController.getMeetingInvitati
 router.get('/applications/by-status', applicationController.getApplicationsByStatus);
 router.post('/admin/createNewApplication', applicationInfoController.createNewApplication);
 router.post('/admin/createMeetingInvitation', createmeetingInvitationController.createMeetingInvitation);
-router.get('/admin/getMeetingNumber', meetingInvitationDetailsController.getMeetingIdAndNumber);
+router.get('/admin/getMeetingNumber/id/:userId', meetingInvitationDetailsController.getMeetingIdAndNumber);
 module.exports = router;
