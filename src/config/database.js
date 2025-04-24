@@ -11,3 +11,8 @@ const pool = mysql.createPool({
 });
 
 module.exports = pool;
+
+
+// DB_HOST=15.207.85.206
+// DB_USERNAME=dbnexintel
+// DB_PASSWORD=dbnexintel@123
