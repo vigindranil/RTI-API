@@ -2,30 +2,31 @@ const pool = require('../config/database');
 
 class MeetingInvitation {
   static async getDetails(applicationNo, meetingId, userId) {
+    const connection = await pool.getConnection();
     try {
       // Get meeting invitation details
-      const [results] = await pool.execute(
+      const [results] = await connection.execute(
         'CALL GetMeetingInvitationDetails(?, ?, ?)',
-        [applicationNo || " ", meetingId || 0, userId]
+        [applicationNo || '', meetingId || 0, userId]
       );
 
       const meetingInvitations = results[0] || [];
-     
 
       // Process each meeting invitation
       for (const invitation of meetingInvitations) {
         try {
           // Get invitation members
-          const [membersResult] = await pool.execute(
+          const [membersResult] = await connection.execute(
             'CALL GetInvitationMembersByMeetingId(?)',
             [invitation.id]
           );
+         
           const invitationMembers = membersResult[0] || [];
 
           // Get committee member details for each invitation member
           for (const member of invitationMembers) {
             if (member.committe_member_id) {
-              const [committeeMemberResult] = await pool.execute(
+              const [committeeMemberResult] = await connection.execute(
                 'CALL GetCommitteeMemberById(?)',
                 [member.committe_member_id]
               );
@@ -35,7 +36,7 @@ class MeetingInvitation {
           invitation.invitation_members = invitationMembers;
 
           // Get invitation applications
-          const [applicationsResult] = await pool.execute(
+          const [applicationsResult] = await connection.execute(
             'CALL GetInvitationApplicationsByMeetingId(?)',
             [invitation.id]
           );
@@ -44,7 +45,7 @@ class MeetingInvitation {
           // Get application info for each invitation application
           for (const application of invitationApplications) {
             if (application.application_id) {
-              const [applicationInfoResult] = await pool.execute(
+              const [applicationInfoResult] = await connection.execute(
                 'CALL GetApplicationInfoById(?)',
                 [application.application_id]
               );
@@ -59,10 +60,31 @@ class MeetingInvitation {
         }
       }
 
-      return meetingInvitations;
+      return {
+        success: true,
+        data: meetingInvitations
+      };
     } catch (error) {
       console.error('Error in getDetails:', error);
       throw error;
+    } finally {
+      connection.release();
+    }
+  }
+
+  static async getMeetingIdAndNumber(userId) {
+    const connection = await pool.getConnection();
+    try {
+      const [results] = await connection.execute('CALL GetMeetingIdAndNumber(?)', [userId]);
+      return {
+        success: true,
+        data: results[0] || []
+      };
+    } catch (error) {
+      console.error('Error in getMeetingIdAndNumber:', error);
+      throw error;
+    } finally {
+      connection.release();
     }
   }
 }
