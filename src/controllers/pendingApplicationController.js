@@ -4,7 +4,16 @@ const ErrorLogger = require('../utils/errorLogger');
 const pendingApplicationController = {
   async getAll(req, res) {
     try {
-      const results = await PendingApplication.getAll();
+      const { userId } = req.query;
+
+      if (!userId) {
+        return res.status(400).json({
+          success: false,
+          error: 'userId is required'
+        });
+      }
+
+      const results = await PendingApplication.getAll(parseInt(userId));
       res.json({
         success: true,
         data: results
