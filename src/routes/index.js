@@ -20,6 +20,10 @@ const createmeetingInvitationController = require('../controllers/createmeetingI
 const meetingInvitationDetailsController = require('../controllers/meetingInvitationDetailsController');
 
 const committeeMeetingController = require('../controllers/committeeMeetingController');
+const pendingApplicationController = require('../controllers/pendingApplicationController');
+
+const sectionController = require('../controllers/sectionController');
+
 
 
 
@@ -82,4 +86,8 @@ router.post('/admin/createMeetingInvitation', createmeetingInvitationController.
 router.get('/admin/getMeetingNumber/id/:userId', meetingInvitationDetailsController.getMeetingIdAndNumber);
 
 router.post('/admin/CreatecommitteeMeeting', committeeMeetingController.createMeetingDetails);
+router.get('/meeting/getApplicationForAnswer', pendingApplicationController.getAll);
+router.get('/admin/getSectionNo', sectionController.getAll);
+
+
 module.exports = router;    
