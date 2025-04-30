@@ -26,6 +26,7 @@ const sectionController = require('../controllers/sectionController');
 
 const finalAnswerController = require('../controllers/finalAnswerController');
 const applicationWithAnswersController = require('../controllers/applicationWithAnswersController');
+const answerDraftController = require('../controllers/answerDraftController');
 
 
 
@@ -92,7 +93,7 @@ router.post('/admin/CreatecommitteeMeeting', committeeMeetingController.createMe
 router.get('/meeting/getApplicationForAnswer', pendingApplicationController.getAll);
 router.get('/admin/getSectionNo', sectionController.getAll);
 router.post('/meeting/createFinalAnswer', finalAnswerController.create);
-
+router.post('/meeting/createDraftAnswer', answerDraftController.create);
 router.get('/meeting/finalAnswerList', applicationWithAnswersController.getByUser);
 
 
