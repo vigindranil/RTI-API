@@ -25,7 +25,7 @@ const pendingApplicationController = require('../controllers/pendingApplicationC
 const sectionController = require('../controllers/sectionController');
 
 const finalAnswerController = require('../controllers/finalAnswerController');
-
+const applicationWithAnswersController = require('../controllers/applicationWithAnswersController');
 
 
 
@@ -92,5 +92,8 @@ router.post('/admin/CreatecommitteeMeeting', committeeMeetingController.createMe
 router.get('/meeting/getApplicationForAnswer', pendingApplicationController.getAll);
 router.get('/admin/getSectionNo', sectionController.getAll);
 router.post('/meeting/createFinalAnswer', finalAnswerController.create);
+
+router.get('/meeting/finalAnswerList', applicationWithAnswersController.getByUser);
+
 
 module.exports = router;    
