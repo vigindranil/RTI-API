@@ -5,11 +5,11 @@ class ErrorLogger {
     try {
       const errorMessage = error.message || 'Unknown error';
       const errorCode = error.code || error.errno || 500;
-
-      await pool.execute(
-        'INSERT INTO error_log (procedure_name, error_message, error_code) VALUES (?, ?, ?)',
-        [procedureName, errorMessage, errorCode]
-      );
+      console.log(error.message);
+      // await pool.execute(
+      //   'INSERT INTO ErrorLog (ProcedureName, ErrorMessage) VALUES (?, ?)',
+      //   [procedureName, errorMessage, errorCode]
+      // );
     } catch (logError) {
       console.error('Error logging to database:', logError);
     }

@@ -28,7 +28,7 @@ const finalAnswerController = require('../controllers/finalAnswerController');
 const applicationWithAnswersController = require('../controllers/applicationWithAnswersController');
 const answerDraftController = require('../controllers/answerDraftController');
 
-
+const rtiSystemReportController = require('../controllers/rtiSystemReportController');
 
 
 // SPIO routes
@@ -95,6 +95,6 @@ router.get('/admin/getSectionNo', sectionController.getAll);
 router.post('/meeting/createFinalAnswer', finalAnswerController.create);
 router.post('/meeting/createDraftAnswer', answerDraftController.create);
 router.get('/meeting/finalAnswerList', applicationWithAnswersController.getByUser);
-
+router.get('/admin/getRtiSystemReport', rtiSystemReportController.getReport);
 
 module.exports = router;    
