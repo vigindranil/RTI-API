@@ -31,6 +31,8 @@ const answerDraftController = require('../controllers/answerDraftController');
 const rtiSystemReportController = require('../controllers/rtiSystemReportController');
 const reportController = require('../controllers/reportController');
 
+const areareportController = require('../controllers/areareportController');
+
 
 
 // SPIO routes
@@ -99,4 +101,7 @@ router.post('/meeting/createDraftAnswer', answerDraftController.create);
 router.get('/meeting/finalAnswerList', applicationWithAnswersController.getByUser);
 router.get('/admin/getRtiSystemReport', rtiSystemReportController.getReport);
 router.get('/admin/allReport', reportController.getAllReport);
+
+router.get('/dashboard/areaWiseApplicationReport', areareportController.getApplicationCountByArea);
+
 module.exports = router;    
