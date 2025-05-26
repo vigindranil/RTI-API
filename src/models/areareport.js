@@ -35,6 +35,36 @@ class Report {
     }));
   }
 
+  static async getGenderwiseApplicationCount(formattedStartDate, formattedEndDate, userId) {
+    const [results] = await pool.execute('CALL sp_get_genderwise_application_count(?, ?, ?)', [
+      formattedStartDate,
+      formattedEndDate,
+      userId
+    ]);
+    
+    return results[0];
+  }
+
+  static async getDistrictwiseApplicationCount(formattedStartDate, formattedEndDate, userId) {
+    const [results] = await pool.execute('CALL sp_get_application_count_by_district(?, ?, ?)', [
+      formattedStartDate,
+      formattedEndDate,
+      userId
+    ]);
+    
+    return results[0];
+  }
+  static async getBplApplicationCount(formattedStartDate, formattedEndDate, userId) {
+    const [results] = await pool.execute('CALL sp_get_bpl_application_count(?, ?, ?)', [
+      formattedStartDate,
+      formattedEndDate,
+      userId
+    ]);
+    
+    return results[0];
+  }
+
+
   static getFinancialYearStartEnd(year) {
     return {
       start: new Date(year - 1, 3, 1),

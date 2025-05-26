@@ -32,6 +32,7 @@ const rtiSystemReportController = require('../controllers/rtiSystemReportControl
 const reportController = require('../controllers/reportController');
 
 const areareportController = require('../controllers/areareportController');
+const firstAppealController = require('../controllers/firstAppealController');
 
 
 
@@ -103,5 +104,19 @@ router.get('/admin/getRtiSystemReport', rtiSystemReportController.getReport);
 router.get('/admin/allReport', reportController.getAllReport);
 
 router.get('/dashboard/areaWiseApplicationReport', areareportController.getApplicationCountByArea);
+router.get('/dashboard/genderWiseApplicationReport', areareportController.getGenderwiseApplicationCount);
+router.get('/dashboard/districtWiseReport', areareportController.getDistrictwiseApplicationCount);
+router.get('/dashboard/bplWiseReport', areareportController.getBplApplicationCount);
 
-module.exports = router;    
+// admin/createFirstAppeal
+
+
+// POST: Create a new first appeal
+router.post('/admin/createFirstAppeal', firstAppealController.create);
+
+// GET: Retrieve a first appeal by ID
+// router.get('/:id', firstAppealController.getById);
+
+// GET: Retrieve first appeals by application ID
+// router.get('/application/:applicationId', firstAppealController.getByApplicationId);
+module.exports = router;        
